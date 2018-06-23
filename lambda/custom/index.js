@@ -73,57 +73,57 @@ const QuizHandler = {
   },
 };
 
-// const DefinitionHandler = {
-//   canHandle(handlerInput) {
-//     console.log("Inside DefinitionHandler");
-//     const attributes = handlerInput.attributesManager.getSessionAttributes();
-//     const request = handlerInput.requestEnvelope.request;
+const DefinitionHandler = {
+  canHandle(handlerInput) {
+    console.log("Inside DefinitionHandler");
+    const attributes = handlerInput.attributesManager.getSessionAttributes();
+    const request = handlerInput.requestEnvelope.request;
 
-//     return attributes.state !== states.QUIZ &&
-//            request.type === 'IntentRequest' &&
-//            request.intent.name === 'AnswerIntent';
-//   },
-//   handle(handlerInput) {
-//     console.log("Inside DefinitionHandler - handle");
-//     //GRABBING ALL SLOT VALUES AND RETURNING THE MATCHING DATA OBJECT.
-//     const item = getItem(handlerInput.requestEnvelope.request.intent.slots);
-//     const response = handlerInput.responseBuilder;
+    return attributes.state !== states.QUIZ &&
+           request.type === 'IntentRequest' &&
+           request.intent.name === 'AnswerIntent';
+  },
+  handle(handlerInput) {
+    console.log("Inside DefinitionHandler - handle");
+    //GRABBING ALL SLOT VALUES AND RETURNING THE MATCHING DATA OBJECT.
+    const item = getItem(handlerInput.requestEnvelope.request.intent.slots);
+    const response = handlerInput.responseBuilder;
 
-//     //IF THE DATA WAS FOUND
-//     if (item && item[Object.getOwnPropertyNames(data[0])[0]] !== undefined) {
-//       if (useCardsFlag) {
-//         response.withStandardCard(
-//           getCardTitle(item),
-//           getTextDescription(item),
-//           getSmallImage(item),
-//           getLargeImage(item))
-//       }
+    //IF THE DATA WAS FOUND
+    if (item && item[Object.getOwnPropertyNames(data[0])[0]] !== undefined) {
+      if (useCardsFlag) {
+        response.withStandardCard(
+          getCardTitle(item),
+          getTextDescription(item),
+          getSmallImage(item),
+          getLargeImage(item))
+      }
 
-//       if(supportsDisplay(handlerInput)) {
-//         const image = new Alexa.ImageHelper().addImageInstance(getLargeImage(item)).getImage();
-//         const title = getCardTitle(item);
-//         const primaryText = new Alexa.RichTextContentHelper().withPrimaryText(getTextDescription(item, "<br/>")).getTextContent();
-//         response.addRenderTemplateDirective({
-//           type: 'BodyTemplate2',
-//           backButton: 'visible',
-//           image,
-//           title,
-//           textContent: primaryText,
-//         });
-//       }
-//       return response.speak(getSpeechDescription(item))
-//               .reprompt(repromptSpeech)
-//               .getResponse();
-//     }
-//     //IF THE DATA WAS NOT FOUND
-//     else
-//     {
-//       return response.speak(getBadAnswer(item))
-//               .reprompt(getBadAnswer(item))
-//               .getResponse();
-//     }
-//   }
-// };
+      if(supportsDisplay(handlerInput)) {
+        const image = new Alexa.ImageHelper().addImageInstance(getLargeImage(item)).getImage();
+        const title = getCardTitle(item);
+        const primaryText = new Alexa.RichTextContentHelper().withPrimaryText(getTextDescription(item, "<br/>")).getTextContent();
+        response.addRenderTemplateDirective({
+          type: 'BodyTemplate2',
+          backButton: 'visible',
+          image,
+          title,
+          textContent: primaryText,
+        });
+      }
+      return response.speak(getSpeechDescription(item))
+              .reprompt(repromptSpeech)
+              .getResponse();
+    }
+    //IF THE DATA WAS NOT FOUND
+    else
+    {
+      return response.speak(getBadAnswer(item))
+              .reprompt(getBadAnswer(item))
+              .getResponse();
+    }
+  }
+};
 
 const QuizAnswerHandler = {
   canHandle(handlerInput) {
@@ -295,7 +295,7 @@ const ErrorHandler = {
 const skillBuilder = Alexa.SkillBuilders.custom();
 const imagePath = "https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/quiz-game/state_flag/{0}x{1}/{2}._TTH_.png";
 const backgroundImagePath = "https://m.media-amazon.com/images/G/01/mobile-apps/dex/alexa/alexa-skills-kit/tutorials/quiz-game/state_flag/{0}x{1}/{2}._TTH_.png"
-const speechConsCorrect = ['Booya', 'All righty', 'Bam', 'Bazinga', 'Bingo', 'Boom', 'Bravo', 'Cha Ching', 'Cheers', 'Dynomite', 'Hip hip hooray', 'Hurrah', 'Hurray', 'Huzzah', 'Oh dear.  Just kidding.  Hurray', 'Kaboom', 'Kaching', 'Oh snap', 'Phew','Righto', 'Way to go', 'Well done', 'Whee', 'Woo hoo', 'Yay', 'Wowza', 'Yowsa'];
+const speechConsCorrect = ['Woohoo', 'All righty', 'Bam', 'Bazinga', 'Bingo', 'Boom', 'Bravo', 'Cha Ching', 'Cheers', 'Dynomite', 'Hip hip hooray', 'Hurrah', 'Hurray', 'Huzzah', 'Oh dear.  Just kidding.  Hurray', 'Kaboom', 'Kaching', 'Oh snap', 'Phew','Righto', 'Way to go', 'Well done', 'Whee', 'Woo hoo', 'Yay', 'Wowza', 'Yowsa'];
 const speechConsWrong = ['Argh', 'Aw man', 'Blarg', 'Blast', 'Boo', 'Bummer', 'Darn', "D'oh", 'Dun dun dun', 'Eek', 'Honk', 'Le sigh', 'Mamma mia', 'Oh boy', 'Oh dear', 'Oof', 'Ouch', 'Ruh roh', 'Shucks', 'Uh oh', 'Wah wah', 'Whoops a daisy', 'Yikes'];
 const data = [
   {letter: 'A', animal: 'alligator'},
@@ -387,9 +387,9 @@ function getBackgroundImage(label, height = 1024, width = 600) {
     .replace("{2}", label);
 }
 
-// function getSpeechDescription(item) {
-//   return `${item.StateName} is the ${item.StatehoodOrder}th state, admitted to the Union in ${item.StatehoodYear}.  The capital of ${item.StateName} is ${item.Capital}, and the abbreviation for ${item.StateName} is <break strength='strong'/><say-as interpret-as='spell-out'>${item.Abbreviation}</say-as>.  I've added ${item.StateName} to your Alexa app.  Which other state or capital would you like to know about?`;
-// }
+function getSpeechDescription(item) {
+  return `${item.StateName} is the ${item.StatehoodOrder}th state, admitted to the Union in ${item.StatehoodYear}.  The capital of ${item.StateName} is ${item.Capital}, and the abbreviation for ${item.StateName} is <break strength='strong'/><say-as interpret-as='spell-out'>${item.Abbreviation}</say-as>.  I've added ${item.StateName} to your Alexa app.  Which other state or capital would you like to know about?`;
+}
 
 function formatCasing(key) {
   return key.split(/(?=[A-Z])/).join(' ');
