@@ -47,7 +47,7 @@ const QuizHandler = {
     if (supportsDisplay(handlerInput)) {
       const title = `Question #${attributes.counter}`;
       const primaryText = new Alexa.RichTextContentHelper().withPrimaryText(getQuestionWithoutOrdinal(property, item)).getTextContent();
-      const backgroundImage = new Alexa.ImageHelper().addImageInstance(getBackgroundImage(attributes.quizItem.Abbreviation)).getSmallImage();
+      const backgroundImage = new Alexa.ImageHelper().addImageInstance(getBackgroundImage(attributes.quizItem.animal)).getSmallImage();
       const itemList = [];
       getAndShuffleMultipleChoiceAnswers(attributes.selectedItemIndex, item, property).forEach((x, i) => {
         itemList.push(
@@ -166,7 +166,7 @@ const QuizAnswerHandler = {
       if (supportsDisplay(handlerInput)) {
         const title = `Question #${attributes.counter}`;
         const primaryText = new Alexa.RichTextContentHelper().withPrimaryText(getQuestionWithoutOrdinal(attributes.quizProperty, attributes.quizItem)).getTextContent();
-        const backgroundImage = new Alexa.ImageHelper().addImageInstance(getBackgroundImage(attributes.quizItem.Abbreviation)).getSmallImage();
+        const backgroundImage = new Alexa.ImageHelper().addImageInstance(getBackgroundImage(attributes.quizItem.animal)).getSmallImage();
         const itemList = [];
         getAndShuffleMultipleChoiceAnswers(attributes.selectedItemIndex, attributes.quizItem, attributes.quizProperty).forEach((x, i) => {
           itemList.push(
@@ -406,7 +406,7 @@ function getQuestionWithoutOrdinal(property, item) {
 }
 
 function getAnswer(property, item) {
-  var sound = '<audio src="https://s3.ca-central-1.amazonaws.com/alexa-study-buddy/zebra.mp3" />'
+  var sound = '<audio src="https://s3.ca-central-1.amazonaws.com/alexa-study-buddy/${item.animal}.mp3" />'
   return `The first letter of ${item.animal} is ${item.letter}. ${sound} `;
 }
 
