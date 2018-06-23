@@ -406,7 +406,8 @@ function getQuestionWithoutOrdinal(property, item) {
 }
 
 function getAnswer(property, item) {
-  return `The first letter of ${item.animal} is ${item.letter}. `;
+  var sound = '<audio src="https://s3.ca-central-1.amazonaws.com/alexa-study-buddy/zebra.mp3" />'
+  return `The first letter of ${item.animal} is ${item.letter}. ${sound} `;
 }
 
 function getRandom(min, max) {
