@@ -406,12 +406,7 @@ function getQuestionWithoutOrdinal(property, item) {
 }
 
 function getAnswer(property, item) {
-  switch (property) {
-    case 'letter':
-      return `The first letter of ${item.animal} is <say-as interpret-as='spell-out'>${item[property]}</say-as>. `;
-    default:
-      return `The first letter of ${item.animal} is ${item[property]}. `;
-  }
+  return `The first letter of ${item.animal} is ${item.letter}. `;
 }
 
 function getRandom(min, max) {
