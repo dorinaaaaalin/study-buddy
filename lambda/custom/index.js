@@ -47,7 +47,7 @@ const QuizHandler = {
     if (supportsDisplay(handlerInput)) {
       const title = `Question #${attributes.counter}`;
       // const primaryText = new Alexa.RichTextContentHelper().withPrimaryText(getQuestionWithoutOrdinal(property, item)).getTextContent();
-      const backgroundImage = new Alexa.ImageHelper().addImageInstance(getBackgroundImage(attributes.quizItem.animal)).getSmallImage();
+      // const backgroundImage = new Alexa.ImageHelper().addImageInstance(getBackgroundImage(attributes.quizItem.animal)).getSmallImage();
       const itemList = [];
       getAndShuffleMultipleChoiceAnswers(attributes.selectedItemIndex, item, property).forEach((x, i) => {
         itemList.push(
@@ -61,7 +61,7 @@ const QuizHandler = {
         type : 'ListTemplate1',
         token : 'Question',
         backButton : 'hidden',
-        backgroundImage,
+        // backgroundImage,
         title,
         listItems : itemList,
       });
