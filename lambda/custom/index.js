@@ -61,7 +61,7 @@ const QuizHandler = {
         type : 'ListTemplate1',
         token : 'Question',
         backButton : 'hidden',
-        backgroundImage,
+        // backgroundImage,
         title,
         listItems : itemList,
       });
