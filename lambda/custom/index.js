@@ -158,7 +158,7 @@ const QuizAnswerHandler = {
     var question = ``;
     //IF YOUR QUESTION COUNT IS LESS THAN 10, WE NEED TO ASK ANOTHER QUESTION.
     if (attributes.counter < 10) {
-      speakOutput += getCurrentScore(attributes.quizScore, attributes.counter);
+      // speakOutput += getCurrentScore(attributes.quizScore, attributes.counter);
       question = askQuestion(handlerInput);
       speakOutput += question;
       repromptOutput = question;
@@ -355,9 +355,9 @@ function getBadAnswer(item) {
   return `I'm sorry. ${item} is not something I know very much about in this skill. ${helpMessage}`;
 }
 
-function getCurrentScore(score, counter) {
-  return `Your current score is ${score} out of ${counter}. `;
-}
+// function getCurrentScore(score, counter) {
+//   return `Your current score is ${score} out of ${counter}. `;
+// }
 
 function getFinalScore(score, counter) {
   return `Your final score is ${score} out of ${counter}. `;
