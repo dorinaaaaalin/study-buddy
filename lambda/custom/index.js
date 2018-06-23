@@ -46,14 +46,14 @@ const QuizHandler = {
 
     if (supportsDisplay(handlerInput)) {
       const title = `Question #${attributes.counter}`;
-      const primaryText = new Alexa.RichTextContentHelper().withPrimaryText(getQuestionWithoutOrdinal(property, item)).getTextContent();
-      const backgroundImage = new Alexa.ImageHelper().addImageInstance(getBackgroundImage(attributes.quizItem.Abbreviation)).getSmallImage();
+      // const primaryText = new Alexa.RichTextContentHelper().withPrimaryText(getQuestionWithoutOrdinal(property, item)).getTextContent();
+      const backgroundImage = new Alexa.ImageHelper().addImageInstance(getBackgroundImage(attributes.quizItem.animal)).getSmallImage();
       const itemList = [];
       getAndShuffleMultipleChoiceAnswers(attributes.selectedItemIndex, item, property).forEach((x, i) => {
         itemList.push(
           {
             "token" : x,
-            "textContent" : new Alexa.PlainTextContentHelper().withPrimaryText(x).getTextContent(),
+            // "textContent" : new Alexa.PlainTextContentHelper().withPrimaryText(x).getTextContent(),
           }
         );
       });
@@ -165,14 +165,14 @@ const QuizAnswerHandler = {
 
       if (supportsDisplay(handlerInput)) {
         const title = `Question #${attributes.counter}`;
-        const primaryText = new Alexa.RichTextContentHelper().withPrimaryText(getQuestionWithoutOrdinal(attributes.quizProperty, attributes.quizItem)).getTextContent();
-        const backgroundImage = new Alexa.ImageHelper().addImageInstance(getBackgroundImage(attributes.quizItem.Abbreviation)).getSmallImage();
+        // const primaryText = new Alexa.RichTextContentHelper().withPrimaryText(getQuestionWithoutOrdinal(attributes.quizProperty, attributes.quizItem)).getTextContent();
+        const backgroundImage = new Alexa.ImageHelper().addImageInstance(getBackgroundImage(attributes.quizItem.animal)).getSmallImage();
         const itemList = [];
         getAndShuffleMultipleChoiceAnswers(attributes.selectedItemIndex, attributes.quizItem, attributes.quizProperty).forEach((x, i) => {
           itemList.push(
             {
               "token" : x,
-              "textContent" : new Alexa.PlainTextContentHelper().withPrimaryText(x).getTextContent(),
+              // "textContent" : new Alexa.PlainTextContentHelper().withPrimaryText(x).getTextContent(),
             }
           );
         });
@@ -193,12 +193,12 @@ const QuizAnswerHandler = {
       speakOutput += getFinalScore(attributes.quizScore, attributes.counter) + exitSkillMessage;
       if(supportsDisplay(handlerInput)) {
         const title = 'Thank you for playing';
-        const primaryText = new Alexa.RichTextContentHelper().withPrimaryText(getFinalScore(attributes.quizScore, attributes.counter)).getTextContent();
+        // const primaryText = new Alexa.RichTextContentHelper().withPrimaryText(getFinalScore(attributes.quizScore, attributes.counter)).getTextContent();
         response.addRenderTemplateDirective({
           type : 'BodyTemplate1',
           backButton: 'hidden',
           title,
-          textContent: primaryText,
+          // textContent: primaryText,
         });
       }
       return response.speak(speakOutput).getResponse();
@@ -477,16 +477,16 @@ function getSpeechCon(type) {
 }
 
 
-function getTextDescription(item) {
-  let text = '';
+// function getTextDescription(item) {
+//   let text = '';
 
-  for (const key in item) {
-    if (Object.prototype.hasOwnProperty.call(item, key)) {
-      text += `${formatCasing(key)}: ${item[key]}\n`;
-    }
-  }
-  return text;
-}
+//   for (const key in item) {
+//     if (Object.prototype.hasOwnProperty.call(item, key)) {
+//       text += `${formatCasing(key)}: ${item[key]}\n`;
+//     }
+//   }
+//   return text;
+// }
 
 function getAndShuffleMultipleChoiceAnswers(currentIndex, item, property) {
   return shuffle(getMultipleChoiceAnswers(currentIndex, item, property));
